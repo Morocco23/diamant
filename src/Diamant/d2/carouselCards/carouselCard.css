@@ -1,0 +1,210 @@
+/* ScrollableCard.css */
+
+/* Root variables for theme colors */
+:root {
+  --tcsbg: #ffffff;     /* Background gradient start */
+  --tcs: #462700;       /* Background gradient end */
+  --tcsf: #462700; /* Card face background */
+  --highlight-gold: #ffc963;
+  --highlight-shadow1: #ffc963;
+  --highlight-shadow2: #FFC700;
+  --highlight-shadow3: #FFB300;
+  --highlight-shadow4: #FFA500;
+  --highlight-shadow5: #FF8C00;
+  --text-light: #d6d6d6;
+  --text-muted: #ccc;
+  --text-faded: #aaa;
+  --card-glow: rgb(223, 226, 245);
+}
+
+/* Background and container setup */
+.cosmos-background {
+  background: linear-gradient(0deg, var(--tcsbg) 70%, var(--tcs) 100%);
+  height: 600px;
+  color: var(--text-light);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Carousel base */
+.carousel-container {
+  perspective: 1000px;
+  width: 100vh;
+  height: 300px;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(70px) rotate(0deg);
+  overflow-y: visible;
+}
+
+.carousel {
+  width: 240px;
+  height: 100%;
+  position: absolute;
+  transform-style: preserve-3d;
+  transition: transform 1s;
+}
+
+.memory-card {
+  position: absolute;
+  width: 240px;
+  height: 200px;
+  background: var(--tcsf);
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+  transition: transform 3s;
+  transform-style: preserve-3d;
+  cursor: pointer;
+}
+
+.card-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.memory-card.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 16px;
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-front {
+  background: linear-gradient(135deg, rgba(10, 10, 10, 0.9) 0%, rgba(26, 26, 46, 0.5) 50%, rgba(10, 10, 10, 0.9) 100%);
+  overflow: hidden;
+}
+
+.card-front.flipped {
+  transform: translateX(180px);
+}
+
+.card-back {
+  background: #111;
+  transform: rotateY(180deg);
+  padding: 2px;
+}
+
+.memory-date,
+.memory-preview,
+.memory-coordinates span {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.memory-date {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.memory-card h3 {
+  color: var(--highlight-gold);
+  text-shadow:
+    0 0 5px var(--highlight-shadow1),
+    0 0 10px var(--highlight-shadow2),
+    0 0 20px var(--highlight-shadow3),
+    0 0 40px var(--highlight-shadow4),
+    0 0 80px var(--highlight-shadow5);
+  font-weight: bold;
+}
+
+.memory-preview {
+  margin: 10px 0;
+  font-style: italic;
+}
+
+.memory-coordinates {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--text-faded);
+}
+
+.carousel-controls {
+  display: flex;
+  gap: 20px;
+  z-index: 4;
+  justify-content: center;
+  position: relative;
+  transform: translateY(80px);
+}
+
+.control-btn {
+  background: #833f0079;
+  border: none;
+  color: white;
+  padding: 15px 25px;
+  border-radius: 8px;
+  cursor: pointer;
+  backdrop-filter: blur(5px);
+  transition: background 0.3s ease;
+  position: relative;
+  bottom: 50px
+}
+
+.control-btn:hover {
+  background: #833f0055;
+}
+
+.memory-image {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80px;
+}
+
+.card-glow {
+  position: absolute;
+  width: 600px;
+  height: 10px;
+  background: var(--card-glow);
+  filter: blur(10px);
+  border-radius: 50%;
+  transform: rotate(45deg);
+  animation: glitch 10s linear infinite;
+}
+
+.glitch-effect {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  background: var(--tcsf);
+  filter: blur(20px);
+  border-radius: 50%;
+  transform: rotate(0deg) translate(30px, 30px);
+}
+
+@keyframes glitch {
+  0% { transform: translate(-330px, 0px) rotate(45deg); }
+  50% { transform: translate(230px, 0px) rotate(45deg); }
+  100% { transform: translate(-330px, 0px) rotate(45deg); }
+}
+
+
+@media (max-width: 768px) {
+  .memory-preview {
+    font-size: 10px;
+  }
+  .cosmos-background {
+    height: 500px;
+  }
+}
