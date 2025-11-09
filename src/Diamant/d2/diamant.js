@@ -2,8 +2,9 @@ import "./diamant.css" ;
 import DotGrid from "./DotGrid";
 import MagicBento from './bento/BottomGrid';
 import ScrollableCard from "./carouselCards/carouselCard";
-import LocateButton from "./location";
 import ceo from "./img/ceo.jpg";
+import { useState } from "react";
+const BAR_ADDRESS = "CAFÉ BAR LE DIAMANT ATTASSI-DROM, FJFR+H68, Agbokou Avakpa, Porto-Novo";
 
 const socialLinks = [
     {
@@ -38,6 +39,41 @@ const socialLinks = [
 
 
 const Diamant_blocks = () => {
+  const [loading, setLoading] = useState(false);
+  
+    const openMaps = () => {
+      setLoading(true);
+  
+      if (!navigator.geolocation) {
+        fallback();
+        return;
+      }
+  
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          const { latitude, longitude } = pos.coords;
+          const origin = `${latitude},${longitude}`;
+          const url = `https://www.google.com/maps/dir/?api=1&origin=${origin}&destination=${encodeURIComponent(
+            BAR_ADDRESS
+          )}&travelmode=driving`;
+          window.open(url, "_blank");
+          setLoading(false);
+        },
+        () => {
+          fallback();
+        },
+        { timeout: 10000 }
+      );
+    };
+  
+    const fallback = () => {
+      const url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+        BAR_ADDRESS
+      )}`;
+      window.open(url, "_blank");
+      setLoading(false);
+    };
+
     return (
       <div>
         <div className="bg">
@@ -82,13 +118,13 @@ const Diamant_blocks = () => {
               Entrez dans DIAMANT BAR, où l'éclat des lustres en cristal rencontre l'âme du battement de minuit de l'Atassi Drome.
             </div>
 
-            <div className="locate-us">
-                <div>Locate Us Instantly!</div>
+            <div className="locate-us" onClick={openMaps} disabled={loading}>
+                <div>{loading ? "Getting location…" : "Locate Us Instantly"}</div>
                 <i>
                   <lord-icon
                       src="https://cdn.lordicon.com/surcxhka.json"
                       trigger="loop"
-                      colors="primary:#000000,secondary:#eec600"
+                      colors="primary:#000000,secondary:#A52A2A"
                       style={{width: '20px', height: '20px'}}
                     />
                 </i>

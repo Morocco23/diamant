@@ -381,3 +381,36 @@ img {
 .sec-4-writeup {
     color: black
 }
+
+@media screen and (max-width: 768px) {
+    .t-1 {
+        font-size: 64px;
+        transform: rotate(-90deg) translateY(-120px) translateX(-130px)
+    }
+    .t-2 {
+        font-size: 54px;
+        transform: rotate(-90deg) translateY(40px) translateX(0px)
+    }
+    .t-3 {
+        font-size: 74px;
+        text-align: right;
+    }
+    .contact-open {
+        flex-direction: column;
+        top: 10%;
+        right: 5px;
+    }
+    .special-info {
+        right: 5px;
+        font-size: 17px;
+        width: 220px;
+    }
+    .locate-us {
+        right: 50px;
+    }
+    .social-links {
+        gap: 6px;
+        top: 10px;
+        right: 10px
+    }
+}
