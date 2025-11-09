@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import "./carouselCard.css";
-import DotGrid from '../DotGrid';
 
 const ScrollableCard = () => {
   useEffect(() => {
