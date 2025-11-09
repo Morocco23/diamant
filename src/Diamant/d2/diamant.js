@@ -38,7 +38,7 @@ const socialLinks = [
   };
 
 
-const Diamant_blocks = () => {
+const DiamantBlocks = () => {
   const [loading, setLoading] = useState(false);
   
     const openMaps = () => {
