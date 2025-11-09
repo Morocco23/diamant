@@ -197,4 +197,4 @@ const DiamantBlocks = () => {
         
     );
 }
-export default Diamant_blocks;
+export default DiamantBlocks;
